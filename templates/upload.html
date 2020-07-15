@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Upload File Test</title>
+</head>
+
+<body>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input oninput="getSizeAndCheck(this)" type="file" name="fileName" accept="image/*" id="uploadfile">
+        <input type="submit" value="Gửi">
+    </form>
+
+    <script>
+        function getSizeAndCheck(elem) {
+            extensions = ['bmp', 'svg', 'tif', 'tiff', 'ico', 'png',
+                'jpg', 'jpeg', 'gif', 'pjp', 'pjpeg', 'jfif',
+                'svgz', 'xbm', 'dib', 'webp'
+            ]
+            if (elem.files.length != 0) {
+                file = elem.files[0];
+                filename = file.name;
+                filename = filename.split(".");
+                extensionsFile = filename[filename.length - 1];
+                if (file.size <= (1 * 1024 * 1024)) {
+                    if (extensions.indexOf(extensionsFile) != -1) {
+                        document.cookie = `filesize=${elem.files[0].size}`
+                    } else {
+                        alert("Định dạng không được hỗ trợ !");
+                        $('#uploadfile').val("");
+                    }
+                } else {
+                    alert("Kích thước tối đa cho phép là 100MB");
+                    $('#uploadfile').val("");
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

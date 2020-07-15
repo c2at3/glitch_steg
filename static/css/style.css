@@ -1,0 +1,178 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+body {
+    vertical-align: middle;
+    background-image: url('../img/background-01.png');
+    background-size: cover;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.Change-Steg {
+    cursor: pointer;
+}
+
+.animationChangeShow {
+    animation: changeShow 1s forwards;
+}
+
+.btn-file {
+    color: #007879;
+    border-radius: 5px;
+    background-color: white;
+    border: 2px solid #01a89e;
+}
+
+.btn-handle {
+    border: 2px solid #e50707;
+    background-color: white;
+    border-radius: 5px;
+    color: #e50744;
+}
+
+.btn-handle:hover {
+    color: white;
+    background-color: #13c6b3e0;
+    border: 2px solid #01a89e;
+}
+
+.btn-file:active {
+    background-color: #fefe15d1;
+    color: #d72828;
+    border-color: #ff7600;
+}
+
+.btn-file:hover {
+    border: 2px solid #e9315cc7;
+    background-color: #e9315cc7;
+    color: white;
+}
+
+@-webkit-keyframes changeShow {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.titleFunc {
+    font-size: 50px;
+}
+
+.animationChangeHide {
+    animation: changeHide 1s forwards;
+}
+
+@-webkit-keyframes changeHide {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+.font-des {
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-size: 16px !important;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    width: 5px;
+    border-radius: 5px;
+    ;
+    background-color: #13c6b486;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #13c6b4d0;
+}
+
+.img-up-one {
+    width: 710px;
+    overflow: hidden;
+    border-radius: 5px;
+    vertical-align: middle;
+    background-image: url("https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1");
+    background-size: cover;
+    animation: zoom 1s forwards;
+}
+
+.img-up-two {
+    width: 510px;
+    overflow: hidden;
+    border-radius: 5px;
+    vertical-align: middle;
+    background-image: url("https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1");
+    background-size: cover;
+}
+
+.img2 {
+    animation: zoom 1s forwards;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    max-width: 710px;
+}
+
+.del-item-image {
+    position: absolute;
+    font-size: 1.3em;
+    color: rgba(31, 31, 31, 0.822);
+}
+
+.del-item-image:hover {
+    color: red;
+    cursor: pointer;
+}
+
+input {
+    width: 159.5px;
+    padding: 3px;
+}
+
+input[type="text"],
+input[type="number"] {
+    color: #00a79d;
+    width: 510px;
+}
+
+textarea {
+    color: black;
+    width: 65%;
+    background-color: #ffffffbf;
+    border-radius: 5px;
+    border: 2px solid;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 79px;
+}

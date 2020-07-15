@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{url_for('static', filename='img/change_icon-01.png')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../static/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/fontawesome-free-5.13.1-web/css/fontawesome.csss">
+    <link rel="stylesheet" href="../static/css/bootstrap4-5-0.min.css">
+    <script src="../static/js/app.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>Steganography Image</title>
+</head>
+
+<body>
+    <div class="container-main">
+        <div class="flex-column m-4">
+            <!-- bao quát -->
+            <class class="flex-row m-2 Change-Steg">
+                <!-- intro -->
+                <img class="m-2 changeFunc" src="{{url_for('static', filename='img/change_icon-01.png')}}" alt="" style="width:80px !important">
+                <span class="m-2 titleFunc">LSB-Steganography: Giấu tin</span>
+            </class>
+            <!--intro-->
+
+            {% if 'numberPixelScan' in form_name %}
+            <!--FORM ẨN TIN-->
+            <form action="" method="POST" enctype="multipart/form-data" name="hideFunc" style="display: none;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <class class="flex-row m-2">
+                    <!--input-->
+                    <input type="file" oninput="getSizeAndCheck(this)" hidden name="fileName" accept="image/*" id="uploadfile" required>
+                    <input class="m-2 btn-file" type="button" id="upload" value="Chọn File">
+                    <input class="m-2 form-control" type="text" name="messageHide" placeholder="Nội dung ẩn giấu" required>
+                    <span style="color: red; font-size: 24px; font-weight: bold;">*</span>
+                    <!--input-->
+                </class>
+                <class class="flex-row">
+                    <!--button-->
+                    <input class="m-2 btn-file" class="" type="button" value="Xem trước" disabled>
+                    <input class="m-2 btn-handle" type="submit" value="Ẩn tin">
+                    <input class="m-2 btn-file" type="reset" value="Clear">
+                </class>
+            </form>
+            <!--END FORM ẨN TIN-->
+
+            <!--FORM GIẢI MÃ TIN-->
+            <form action="" method="POST" enctype="multipart/form-data" name="showFunc">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="flex-column">
+                    <div class="flex-row m-2">
+                        <!--input-->
+                        <input type="file" oninput="getSizeAndCheck(this)" hidden name="fileName" accept="image/*" id="uploadfileShow" required>
+                        <input class="m-2 btn-file" type="button" id="uploadShow" value="Chọn File">
+                        <input class="m-2 form-control" type="number" name="numberPixelScan" min="0" step="1" placeholder="Số pixel sẽ quét" required>
+                        <span style="color: red; font-size: 24px; font-weight: bold;">*</span>
+                        <!--input-->
+                    </div>
+                    <i style="color: red; text-align: center;">NOTE: Để quét toàn bộ dữ liệu LSB của điểm ảnh, hãy đặt số pixel scan bằng <span style="font-size: 21px; font-weight: bold;">0</span></i>
+                    <div class="flex-row">
+                        <!--button-->
+                        <input class="m-2 btn-handle" type="submit" value="Quét">
+                        <input class="m-2 btn-file" type="reset" value="Clear">
+                        <!--button-->
+                    </div>
+                </div>
+            </form>
+            <!--END FORM GIẢN MÃI TIN-->
+            <div class="flex-row m-2">
+                <textarea name="" id="data" style="width: 65%;" disabled rows="3">
+                    {% if data %}
+                        {{data}}
+                    {% endif %}
+                </textarea>
+            </div>
+
+            {% else %}
+
+            <!--FORM ẨN TIN-->
+            <form action="" method="POST" enctype="multipart/form-data" name="hideFunc">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <class class="flex-row m-2">
+                    <!--input-->
+                    <input type="file" oninput="getSizeAndCheck(this)" hidden name="fileName" accept="image/*" id="uploadfile" required>
+                    <input class="m-2 btn-file" type="button" id="upload" value="Chọn File">
+                    <input class="m-2 form-control" type="text" name="messageHide" placeholder="Nội dung ẩn giấu" required>
+                    <span style="color: red; font-size: 24px; font-weight: bold;">*</span>
+                    <!--input-->
+                </class>
+                <class class="flex-row">
+                    <!--button-->
+                    <input class="m-2 btn-file" class="" type="button" value="Xem trước" disabled>
+                    <input class="m-2 btn-handle" type="submit" value="Ẩn tin">
+                    <input class="m-2 btn-file" type="reset" value="Clear">
+                </class>
+            </form>
+            <!--END FORM ẨN TIN-->
+
+            <!--FORM GIẢI MÃ TIN-->
+            <form action="" method="POST" enctype="multipart/form-data" name="showFunc" style="display: none;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div class="flex-column">
+                    <div class="flex-row m-2">
+                        <!--input-->
+                        <input type="file" oninput="getSizeAndCheck(this)" hidden name="fileName" accept="image/*" id="uploadfileShow" required>
+                        <input class="m-2 btn-file" type="button" id="uploadShow" value="Chọn File">
+                        <input class="m-2 form-control" type="number" name="numberPixelScan" min="0" step="1" placeholder="Số pixel sẽ quét" required>
+                        <span style="color: red; font-size: 24px; font-weight: bold;">*</span>
+                        <!--input-->
+                    </div>
+                    <i style="color: red; text-align: center;">NOTE: Để quét toàn bộ dữ liệu LSB của điểm ảnh, hãy đặt số pixel scan bằng <span style="font-size: 21px; font-weight: bold;">0</span></i>
+                    <div class="flex-row">
+                        <!--button-->
+                        <input class="m-2 btn-handle" type="submit" value="Quét">
+                        <input class="m-2 btn-file" type="reset" id="reset" value="Clear">
+                        <!--button-->
+                    </div>
+                </div>
+            </form>
+            <!--END FORM GIẢN MÃI TIN-->
+            <div class="flex-row m-2">
+                <textarea name="" id="data" style="width: 70%; display: none;" disabled rows="3">
+                    {% if data %}
+                        {{data}}
+                    {% endif %}
+                </textarea>
+            </div>
+
+            {% endif %}
+
+
+            <div class="flex-row">
+                <!--img-preview and hide-->
+                {% if link_file %}
+                <div class="m-2 img-up-two img1">
+                    <i class="far del-item-image m-2 font-des">Ảnh gốc</i>
+                    <img class="file-image" src="{{ image_path }}" alt="Ảnh gốc">
+                </div>
+                <!-- <img src="https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1" alt="" width="500px"> -->
+                <div class="m-2 img-up-two img2">
+                    <a href="/download/{{nameFile}}"><span class="font-des del-item-image m-2"><i class="fas fa-cloud-download-alt"></i>  Tải về</span></a>
+                    <img class="file-image-hide" src="{{link_file}}" alt="Ảnh chứa tin">
+                </div>
+                {% elif image_path%}
+                <div class="m-2 img-up-one" style="display: none;">
+                    <span class="font-des del-item-image m-2">Ảnh gốc</span>
+                    <img class="file-image" src="{{image_path}}" alt="Ảnh gốc">
+                </div>
+                {% else %}
+                <div class="m-2 img-up-one" style="display: none;">
+                    <span class="font-des del-item-image m-2">Ảnh gốc</span>
+                    <img class="file-image" src="https://i1.wp.com/ilikeweb.co.za/wp-content/uploads/2019/07/placeholder.png?ssl=1" alt="Ảnh gốc">
+                </div>
+                {% endif%}
+            </div>
+            <!--img-preview and hide-->
+        </div>
+        <!-- bao quát -->
+    </div>
+</body>
+
+</html>
