@@ -54,7 +54,7 @@ opencv-python==4.2.0.32
 parso==0.7.0
 pefile==2017.9.3
 pickleshare==0.7.5
-Pillow==5.2.0
+Pillow==7.1.0
 pipenv==2020.6.2
 plyer==1.4.3
 progressbar2==3.39.3
